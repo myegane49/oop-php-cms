@@ -23,8 +23,45 @@
                 //     echo $user->username . "<br>";
                 // }
 
-                $found_user = User::find_user_by_id(1);
-                echo $found_user->username;
+                // $found_user = User::find_user_by_id(1);
+                // echo $found_user->username;
+            ?>
+
+            <?php 
+                $user = new User();
+                $user->username = "test_user4";
+                $user->password = "123";
+                $user->first_name = "test4";
+                $user->last_name = "user4";
+
+                $user->create();
+            ?>
+
+            <?php
+                // $user = User::find_user_by_id(9);
+                // $user->first_name = 'DonaldJ';
+                // $user->last_name = 'Trump';
+                // $user->update();
+            ?>
+
+            <?php
+                // $user = User::find_user_by_id(7);
+                // $user->delete();
+            ?>
+
+            <?php
+                // $user = User::find_user_by_id(8);
+                // $user->username = "example";
+                // $user->save();
+            ?>
+
+            <?php
+                // $user = new User();
+                // $user->username = "whatev";
+                // $user->password = "whatev_pass";
+                // $user->first_name = "whatev_name";
+                // $user->last_name = "whatev_last";
+                // $user->save();
             ?>
 
             <ol class="breadcrumb">
