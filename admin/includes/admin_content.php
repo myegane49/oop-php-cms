@@ -25,16 +25,21 @@
 
                 // $found_user = User::find_user_by_id(1);
                 // echo $found_user->username;
+
+                $users = User::find_all();
+                foreach($users as $user) {
+                    echo $user->username . "<br>";
+                }
             ?>
 
             <?php 
-                $user = new User();
-                $user->username = "test_user4";
-                $user->password = "123";
-                $user->first_name = "test4";
-                $user->last_name = "user4";
+                // $user = new User();
+                // $user->username = "test_user4";
+                // $user->password = "123";
+                // $user->first_name = "test4";
+                // $user->last_name = "user4";
 
-                $user->create();
+                // $user->create();
             ?>
 
             <?php
