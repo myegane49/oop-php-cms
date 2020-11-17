@@ -9,9 +9,9 @@ class DbObject {
     return static::find_this_query("SELECT * FROM $table");
   }
 
-  public static function find_by_id($user_id) {
+  public static function find_by_id($id) {
     $table = static::$db_table;
-    $result = static::find_this_query("SELECT * FROM $table WHERE id = $user_id");
+    $result = static::find_this_query("SELECT * FROM $table WHERE id = $id");
     // $found_user = mysqli_fetch_assoc($result);
     // return $found_user;
 
@@ -32,7 +32,7 @@ class DbObject {
     return $the_object_array;
   }
 
-  static function instantiation($found_user) {
+  static function instantiation($found_record) {
     // $user = new self;
     $calling_class = get_called_class();
     $the_object = new $calling_class;
@@ -43,7 +43,7 @@ class DbObject {
     // $user->first_name = $found_user['first_name'];
     // $user->last_name = $found_user['last_name'];
 
-    foreach($found_user as $property => $value) {
+    foreach($found_record as $property => $value) {
       if ($the_object->has_the_property($property)) {
         $the_object->$property = $value;
       }

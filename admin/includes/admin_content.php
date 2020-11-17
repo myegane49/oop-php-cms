@@ -26,10 +26,11 @@
                 // $found_user = User::find_user_by_id(1);
                 // echo $found_user->username;
 
-                $users = User::find_all();
-                foreach($users as $user) {
-                    echo $user->username . "<br>";
-                }
+                // $users = User::find_all();
+                // foreach($users as $user) {
+                //     echo $user->username . "<br>";
+                // }
+
             ?>
 
             <?php 
@@ -67,6 +68,26 @@
                 // $user->first_name = "whatev_name";
                 // $user->last_name = "whatev_last";
                 // $user->save();
+            ?>
+
+            <?php
+                // $photos = Photo::find_all();
+                // foreach($photos as $photo) {
+                //     echo $photo->title . "<br>";
+                // }
+
+                // $photo = new Photo();
+                // $photo->title = "second photo";
+                // $photo->description = "desc 2";
+                // $photo->type = "image";
+                // $photo->size = 20;
+
+                // $photo->create();
+            ?>
+
+            <?php
+                $photo = Photo::find_by_id(4);
+                echo $photo->title;
             ?>
 
             <ol class="breadcrumb">
