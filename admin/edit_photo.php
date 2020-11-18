@@ -15,6 +15,8 @@ if (empty($_GET['id'])) {
       $photo->caption = $_POST['caption'];
       $photo->alternate_text = $_POST['alternate_text'];
       $photo->description = $_POST['description'];
+
+      $photo->save();
     }
   }
 }
@@ -46,6 +48,10 @@ if (empty($_GET['id'])) {
                       <div class="form-group">
                         <label>Title</label>
                         <input type="text" class="form-control" name="title" value="<?php echo $photo->title; ?>">
+                      </div>
+
+                      <div class="form-group">
+                        <a href=""><img src="<?php echo $photo->picture_path(); ?>" alt="" width="200px"></a>
                       </div>
 
                       <div class="form-group">
