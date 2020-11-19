@@ -23,10 +23,9 @@ $users = User::find_all();
               <div class="row">
                   <div class="col-lg-12">
                       <h1 class="page-header">
-                          users
-                          <small>Subheading</small>
+                          Users
                       </h1>
-                     
+                     <a class="btn btn-primary" href="add_user.php">Add User</a>                     
                      <div class="col-md-12">
                         <table class="table table-hover">
                             <thead>
@@ -42,7 +41,7 @@ $users = User::find_all();
                                 <?php foreach($users as $user) : ?>
                                     <tr>
                                         <td><?php echo $user->id; ?></td>
-                                        <td><img src="<?php echo $user->user_image; ?>" class="admin-user-thumbnail"></td>                  
+                                        <td><img src="<?php echo $user->avatar_path(); ?>" class="admin-user-thumbnail"></td>                  
                                         <td>
                                             <?php echo $user->username; ?>
                                             <div class="action_links">
