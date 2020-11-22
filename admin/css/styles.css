@@ -1,4 +1,4 @@
-.admin-user-thumbnail {
+.admin-user-thumbnail, .admin-photo-thumbnail {
   width: 100px;
   border-radius: 5px;
 }

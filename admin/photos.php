@@ -36,6 +36,7 @@ $photos = Photo::find_all();
                                     <th>Title</th>
                                     <th>File Name</th>
                                     <th>Size</th>
+                                    <th>Comments</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -44,15 +45,18 @@ $photos = Photo::find_all();
                                         <td><?php echo $photo->id; ?></td>
                                         <td>
                                             <img src="<?php echo $photo->picture_path(); ?>" class="admin-photo-thumbnail">
-                                            <div class="pictures_link">
+                                            <div class="action_links">
                                                 <a href="delete_photo.php?id=<?php echo $photo->id; ?>">Delete</a>
                                                 <a href="edit_photo.php?id=<?php echo $photo->id; ?>">Edit</a>
-                                                <a href="">View</a>
+                                                <a href="../photo.php?id=<?php echo $photo->id; ?>">View</a>
                                             </div>
                                         </td>
                                         <td><?php echo $photo->title; ?></td>
                                         <td><?php echo $photo->filename; ?></td>
                                         <td><?php echo $photo->size; ?></td>                                       
+                                        <td>
+                                            <a href="comment_photo.php?id=<?php echo $photo->id; ?>"><?php echo count(Comment::find_the_comments($photo->id)); ?></a>
+                                        </td>                                       
                                     </tr>
                                 <?php endforeach; ?>
                             </tbody>

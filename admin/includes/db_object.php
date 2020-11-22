@@ -1,5 +1,17 @@
 <?php
 class DbObject {
+  public $errors = [];
+  public $upload_errors_array = [
+    UPLOAD_ERR_OK => "there is no error",
+    UPLOAD_ERR_INI_SIZE => "the uploaded file exceeds the upload_max_filesize directive",
+    UPLOAD_ERR_FORM_SIZE => "the uploaded file exceeds the MAX_FILE_SIZE directive",
+    UPLOAD_ERR_PARTIAL => "the uploaded file was only partially uploaded",
+    UPLOAD_ERR_NO_FILE => "no file was uploaded",
+    UPLOAD_ERR_NO_TMP_DIR => "missing a temporary folder",
+    UPLOAD_ERR_CANT_WRITE => "failed to write file to disk",
+    UPLOAD_ERR_EXTENSION => "a php extension stopped the file upload"
+  ];
+
   public static function find_all() {
     // global $database;
     // return $database->query("SELECT * FROM users");
@@ -139,6 +151,17 @@ class DbObject {
     }
 
     return $clean_properties;
+  }
+
+  static function count_all() {
+    global $database;
+
+    $table = static::$db_table;
+    $sql = "SELECT COUNT(*) FROM $table";
+    $result = $database->query($sql);
+    $row = mysqli_fetch_assoc($result);
+
+    return array_shift($row);
   }
 
 }

@@ -13,32 +13,6 @@ class Photo extends DbObject {
 
   public $tmp_path;
   public $upload_directory = "images";
-  public $errors = [];
-  public $upload_errors_array = [
-    UPLOAD_ERR_OK => "there is no error",
-    UPLOAD_ERR_INI_SIZE => "the uploaded file exceeds the upload_max_filesize directive",
-    UPLOAD_ERR_FORM_SIZE => "the uploaded file exceeds the MAX_FILE_SIZE directive",
-    UPLOAD_ERR_PARTIAL => "the uploaded file was only partially uploaded",
-    UPLOAD_ERR_NO_FILE => "no file was uploaded",
-    UPLOAD_ERR_NO_TMP_DIR => "missing a temporary folder",
-    UPLOAD_ERR_CANT_WRITE => "failed to write file to disk",
-    UPLOAD_ERR_EXTENSION => "a php extension stopped the file upload"
-  ];
-
-  public function set_file($file) {
-    if (empty($file) || !$file || !is_array($file)) {
-      $this->errors[] = "there was no file uploaded here";
-      return false;
-    } else if ($file['error'] != 0) {
-      $this->errors[] = $this->upload_errors_array[$file['error']];
-      return false;
-    } else {
-      $this->filename = basename($file['name']);
-      $this->tmp_path = $file['tmp_name'];
-      $this->size = $file['size'];
-      $this->type = $file['type'];
-    }
-  }
 
   public function save() {
     if ($this->id) {
@@ -82,6 +56,21 @@ class Photo extends DbObject {
       return unlink($target_path) ? true : false;
     } else {
       return false;
+    }
+  }
+
+  public function set_file($file) {
+    if (empty($file) || !$file || !is_array($file)) {
+      $this->errors[] = "there was no file uploaded here";
+      return false;
+    } else if ($file['error'] != 0) {
+      $this->errors[] = $this->upload_errors_array[$file['error']];
+      return false;
+    } else {
+      $this->filename = basename($file['name']);
+      $this->tmp_path = $file['tmp_name'];
+      $this->size = $file['size'];
+      $this->type = $file['type'];
     }
   }
 }

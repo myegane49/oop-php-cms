@@ -1,20 +1,27 @@
 <?php include("includes/header.php"); ?>
 <?php 
-if (!$session->is_signed_in()) { redirect("login.php"); } 
+  if (!$session->is_signed_in()) { redirect("login.php"); } 
 ?>
 
 <?php
 
-  if (isset($_POST['create'])) {
-    $user = new User();
-    $user->username = $_POST['username'];
-    $user->first_name = $_POST['first_name'];
-    $user->last_name = $_POST['last_name'];
-    $user->password = $_POST['password'];
+  if (empty($_GET['id'])) {
+    redirect("users.php");
+  } else {
+    $user = User::find_by_id($_GET['id']);
+    if (isset($_POST['update'])) {
+      $user->username = $_POST['username'];
+      $user->first_name = $_POST['first_name'];
+      $user->last_name = $_POST['last_name'];
+      $user->password = $_POST['password'];
 
-    $user->set_file($_FILES['user_image']);
-    $user->upload_avatar();
-    $user->save();
+      if (!empty($_FILES['user_image'])) {
+        $user->set_file($_FILES['user_image']);
+        $user->upload_avatar();
+      }
+      $user->save();
+      redirect("edit_user.php?id={$user->id}");
+    }
   }
 
 ?>
@@ -37,35 +44,41 @@ if (!$session->is_signed_in()) { redirect("login.php"); }
                     users
                     <small>Subheading</small>
                 </h1>
-                     
-                <div class="col-md-6 col-md-offset-3">
+
+                <div class="col-md-6">
+                  <img src="<?php echo $user->avatar_path(); ?>" alt="User Avatar" width="300px">
+                </div>     
+
+                <div class="col-md-6">
                   <form action="" method="post" enctype="multipart/form-data">
                       <div class="form-group">
                         <label>Username</label>
-                        <input type="text" class="form-control" name="username">
+                        <input type="text" class="form-control" name="username" value="<?php echo $user->username; ?>">
                       </div>
 
                       <div class="form-group">
                         <label>First Name</label>
-                        <input type="text" class="form-control" name="first_name">
+                        <input type="text" class="form-control" name="first_name" value="<?php echo $user->first_name; ?>">
                       </div>
                       
                       <div class="form-group">
                         <label>Last Name</label>
-                        <input type="text" class="form-control" name="last_name">
+                        <input type="text" class="form-control" name="last_name" value="<?php echo $user->last_name; ?>">
                       </div>
                       
                       <div class="form-group">
                         <label>Password</label>
-                        <input type="password" class="form-control" name="password">
+                        <input type="password" class="form-control" name="password" value="<?php echo $user->password; ?>">
                       </div>
 
                       <div class="form-group">
                         <label>Avatar</label>
                         <input type="file" class="form-control-file" name="user_image">
                       </div>
+
+                      <a href="delete_user.php?id=<?php echo $user->id; ?>" class="btn btn-danger">Delete</a>
                     
-                      <input type="submit" name="create" class="btn btn-primary pull-right" value="Create">
+                      <input type="submit" name="update" class="btn btn-primary pull-right" value="Update">
                   </form>
                 </div>
 
