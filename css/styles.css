@@ -1,0 +1,10 @@
+.home_page_photo {
+  display: inline-block;
+  width: 200px;
+  height: 150px !important;
+}
+
+.pager .active a {
+  background-color: royalblue;
+  color: white;
+}
